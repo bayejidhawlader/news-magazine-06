@@ -9,12 +9,14 @@ const loadCategory = async() => {
    catch(error){
     console.log(error);
    }   
+   
 }
 // LOAD CATEGORY
 loadCategory()
 
 
 const displayCategory= async (data)=>{
+    
     const categoryContainer =document.getElementById('category-container');
     data.forEach(category => {
         const {category_name,category_id} =category;
@@ -26,6 +28,7 @@ const displayCategory= async (data)=>{
         `;
 
         categoryContainer.appendChild(categorieDiv)
+        
         
     });
 };
@@ -41,18 +44,10 @@ const loadCard = async(id) =>{
    }
    catch(error){
     console.log(error);
-   }   
+   }
 }
-
 // CARD LOAD
 loadCard("1")
-
-
-// sort 
-
-
-
-
 
 
 const displayCard =(cards) =>{
@@ -72,6 +67,16 @@ const displayCard =(cards) =>{
             return -1;
         }
     });
+
+
+    const toggleSpinner = (isLoading) => {
+        const loaderSection = document.getElementById("loader");
+        if (isLoading) {
+          loaderSection.classList.remove("hidden");
+        } else {
+          loaderSection.classList.add("hidden");
+        }
+      };
 
     
     // CATEGORY ITEM TEXT
@@ -104,8 +109,6 @@ const displayCard =(cards) =>{
                             </div>
                         </div>
                 
-                        
-
                         <div class="flex" >
                             <div class="flex ml-3 items-center">
                                 <i class="fa-solid fa-eye md:text-black text-sm px-2"></i>
@@ -113,9 +116,11 @@ const displayCard =(cards) =>{
                             </div>                                                      
                         </div>
 
-                         <div class="card-actions justify-end">
-                         <label for="my-modal-4" class="btn btn-primary modal-button" onclick="modal('${card._id}')"><i class="fa-solid fa-arrow-right"><button></button></i></label>
-                       </div>
+                        <div class="flex">
+                          <label for="my-modal-3" onclick="loadFullNews('${card._id}')" class="btn text-white bg-green-700 hover:bg-green-800 border-green-700">See More
+                          <i class="fa-solid md:pl-2 fa-arrow-right invisible md:visible"></i>
+                          </label>                 
+                        </div>
                                         
                       </div>
                     </div>
@@ -127,30 +132,26 @@ const displayCard =(cards) =>{
     
 }
 
-// MODAL
-const modal =async id =>{
-    const url =`https://openapi.programming-hero.com/api/news/${id}`
-    let data ={};
-   try{
-    const res = await fetch (url)
-    data = await res.json()
+const loadFullNews = async id => {
+    try {
+      const url = `https://openapi.programming-hero.com/api/news/${id}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      displayFullNews(data.data);
+    }
+    catch {
+      alert("Data not Found");
+    }
+  }
+  
+  const displayFullNews = newsData => {
+    console.log(newsData)
+    document.getElementById('newsTitle').innerText = newsData[0].title ? newsData[0].title : 'No data found';
+    document.getElementById('fullNews').innerText = newsData[0].details ? newsData[0].details : 'No data found';
+    document.getElementById('newsAuthor').innerText = newsData[0].author.name ? newsData[0].author.name : 'No data found';
+    document.getElementById('newsDate').innerText = newsData[0].author.published_date ? newsData[0].author.published_date : 'No data found';
+  }
 
-   }
-   catch(error){
-    console.log(error);
-   }  
-   const {name,published_date,img} = data.data[0].author;
-      console.log(img);
-      
-    // MODAL BODY
-    const modalBody =document.getElementById('modal-body');
-    modalBody.textContent = "";
-    modalBody.innerHTML =`
-    <p>Author Name :${name ? name : 'Name not found'}</p>
-    <p class="my-3">Published Date :${published_date ? published_date : 'Published date not found'}</p>
-    <img src="${img ? img: 'image not found'}"/>
-    
-    `
-}
+
 
 

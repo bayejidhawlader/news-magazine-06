@@ -50,10 +50,12 @@
    <!-- MAIN SECTION -->
    <main class="bg-backGround">
     <!-- MENU CATEGORY -->
-    <div class="container py-5 container">
-      <div id="category-container" class="menu menu-horizontal rounded-box grid grid-cols-3 lg:grid-cols-8 justify-between ">
+    <section>
+      <div class="container py-5 container">
+        <div id="category-container" class="menu menu-horizontal rounded-box grid grid-cols-3 lg:grid-cols-8 justify-between ">
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- CATEGORY ITEM  -->
     <div id="catefory-item-message" class="w-full container mx-auto bg-white text-black text-primary-content mb-5 shadow-md hidden">
@@ -67,27 +69,32 @@
     <section id="card-section" class="container mx-auto mt-10"></section>
 
     <!-- MODAL -->
-    <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-    <div class="modal">
+    <section id="modal">
+      <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+      <div class="modal">
         <div class="modal-box relative">
-            <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-            <div id="modal-body"></div>
+          <label
+            for="my-modal-3"
+            class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+          <h3 id="newsTitle" class="text-lg font-bold"></h3>
+          <p id="newsAuthor" class="font-semibold pt-2"></p>
+          <p id="newsDate" class="font-extralight"></p>
+          <p id="fullNews" class="py-4"></p>
         </div>
-    </div>
+      </div>
+    </section>
+  </main>
+
 
   <!-- FOOTER  -->
     <footer class="footer footer-center p-10 bg-white text-base-content rounded">
-        <div>
-          <p class="text-black">Copyright © 2022 - Bayejid</p>
-        </div>
+          <p class="text-black text-base">Copyright © 2022 - Bayejid</p>
     </footer>
 
-   </main>
-
-      
 
 
-      <!-- font awesome  -->
+
+    <!-- FONT AWESOME -->
     <script src="https://kit.fontawesome.com/700635448c.js" crossorigin="anonymous"></script>
 
     <!-- Js Script -->
