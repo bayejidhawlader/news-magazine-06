@@ -10,6 +10,8 @@ const loadCategory = async() => {
     console.log(error);
    }   
 }
+// LOAD CATEGORY
+loadCategory()
 
 
 const displayCategory= async (data)=>{
@@ -29,7 +31,7 @@ const displayCategory= async (data)=>{
 };
 
 // card section 
-const loadCard =async(id) =>{
+const loadCard = async(id) =>{
 
     const url =`https://openapi.programming-hero.com/api/news/category/0${id}`
    try{
@@ -41,6 +43,9 @@ const loadCard =async(id) =>{
     console.log(error);
    }   
 }
+
+// CARD LOAD
+loadCard("1")
 
 
 
@@ -63,10 +68,6 @@ const displayCard =(cards) =>{
     // SPINNER 
     const speenerContainer = document.getElementById('spinner');
     speenerContainer.classList.remove('hidden');
-    // console.log(speenerContainer);
-    
-    // sort 
-
     const sortFind = cards.sort((x,y)=>{
         if(x.total_view < y.total_view){
             return 1;
@@ -80,93 +81,78 @@ const displayCard =(cards) =>{
     cards.forEach(card => {
         
         const {image_url,thumbnail_url,title,details,author,total_view,} = card;
-        const {name,published_date,img} =author;
-        
-        
-      // sort 
-       
-        // card section html 
+        const {name,published_date,img} = author;
 
         const cardSectionDiv =document.createElement("div");
 
-            // speener 
+        // SPINNER
         const speenerContainer = document.getElementById('spinner');
         speenerContainer.classList.add('hidden');
          
    
 
-        cardSectionDiv.classList.add("card", "lg:card-side", "bg-white", "shadow-xl", "lg:p-4", "mb-5" ,"w-11/12","lg:w-full","mx-auto")
+        cardSectionDiv.classList.add("card", "lg:card-side", "bg-white", "shadow-xl", "lg:p-4", "mb-15" ,"w-11/12","lg:w-full","mx-auto")
         cardSectionDiv.innerHTML =`
                     <figure class="lg:w-1/4"><img src="${thumbnail_url}" alt="Movie"></figure>
-                    <div class="card-body lg:w-3/4">
+                    <div class="card-body text-black">
                       <h2 class="card-title">${title}</h2>
-                      <p>${details.length > 400 ? details.slice(0,400) + " ....." : details}</p>
+                      <p>${details.length > 400 ? details.slice(0,400) + "..." : details}</p>
                       <div class="card-actions justify-between items-center">                   
                         <div class="flex">
-                            <div class="mr-3">
-                                <img class="w-[40px] rounded-full" src="${img ? img : "img not found"}" alt="">
+                            <div class="mr-4">
+                                <img class="w-[50px] rounded-full" src="${img ? img : "Image not found"}" alt="">
                             </div>
                             <div >
-                                <h4 class="font-bold text-xl">${name ? name : "Name Not Found"}</h4>
+                            <h4 class="font-bold text-xl">${name ? name : "Name Not Found"}</h4>
                             <h5>${published_date ? published_date : "Published Date Not Found"}</h5>
                             </div>
                         </div>
                 
                         <div class="flex" >
-                           <div>
-                            <img src="img/icons8-eye-24.png" alt="">
-                           </div>
                                 <div class="flex ml-3 items-center">
-                                <i class="fa-solid fa-eye text-[#515151] md:text-base text-sm px-1"></i>
+                                    <i class="fa-solid fa-eye text-[#515151] md:text-black text-sm px-2"></i>
                                     <h1><span>${total_view ? total_view : "no views"}</span></h1> 
                                 </div>                                                      
                         </div>
 
                          <div class="card-actions justify-end">
-                         <label for="my-modal-4" class="btn btn-primary modal-button" onclick="modal('${card._id}')"><button>See More <i class="fa-solid fa-arrow-right"></i></button></label>
+                         <label for="my-modal-4" class="btn btn-primary modal-button" onclick="modal('${card._id}')"><i class="fa-solid fa-arrow-right"><button></button></i></label>
                        </div>
                                         
                       </div>
                     </div>
-                  
+                    
         `
-        cardSection.appendChild(cardSectionDiv)
+        cardSection.appendChild(cardSectionDiv) 
         
     });
     
 }
+
+// MODAL
 const modal =async id =>{
     const url =`https://openapi.programming-hero.com/api/news/${id}`
     let data ={};
    try{
-    const res =await fetch (url)
+    const res = await fetch (url)
     data = await res.json()
-    // displayCard(data.data)
+
    }
    catch(error){
     console.log(error);
    }  
    const {name,published_date,img} = data.data[0].author;
-    //   console.log( data.data[0].author);
       console.log(img);
       
-    
+    // MODAL BODY
     const modalBody =document.getElementById('modal-body');
     modalBody.textContent = "";
     modalBody.innerHTML =`
-    <p class="mb-3">Author Name :${name? name  : "name not found"}</p>
-    <p class="mb-3">Published Date :${published_date ? published_date : 'published date not found'}</p>
+    <p>Author Name :${name ? name : 'Name not found'}</p>
+    <p class="my-3">Published Date :${published_date ? published_date : 'Published date not found'}</p>
     <img src="${img ? img: 'image not found'}"/>
     
     `
 }
 
 
-
-
-// card section call 
-loadCard("1")
-
-
-// loadCategory call 
-loadCategory()
