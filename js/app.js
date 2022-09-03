@@ -48,6 +48,11 @@ const loadCard = async(id) =>{
 loadCard("1")
 
 
+// sort 
+
+
+
+
 
 
 const displayCard =(cards) =>{
@@ -58,16 +63,7 @@ const displayCard =(cards) =>{
     const foundedMessege = document.getElementById('catefory-item-message');
     foundedMessege.classList.remove('hidden')
 
-    
-    // CATEGORY ITEM TEXT
-    const fountText = document.getElementById('catefory-item-text')
-    fountText.innerText = cards.length;
-
-
-
-    // SPINNER 
-    const speenerContainer = document.getElementById('spinner');
-    speenerContainer.classList.remove('hidden');
+    // FIND SORT
     const sortFind = cards.sort((x,y)=>{
         if(x.total_view < y.total_view){
             return 1;
@@ -75,8 +71,12 @@ const displayCard =(cards) =>{
         else{
             return -1;
         }
-    })
-    // console.log(sortFind);
+    });
+
+    
+    // CATEGORY ITEM TEXT
+    const fountText = document.getElementById('catefory-item-text')
+    fountText.innerText = cards.length;
 
     cards.forEach(card => {
         
@@ -84,10 +84,6 @@ const displayCard =(cards) =>{
         const {name,published_date,img} = author;
 
         const cardSectionDiv =document.createElement("div");
-
-        // SPINNER
-        const speenerContainer = document.getElementById('spinner');
-        speenerContainer.classList.add('hidden');
          
    
 
@@ -108,11 +104,13 @@ const displayCard =(cards) =>{
                             </div>
                         </div>
                 
+                        
+
                         <div class="flex" >
-                                <div class="flex ml-3 items-center">
-                                    <i class="fa-solid fa-eye text-[#515151] md:text-black text-sm px-2"></i>
-                                    <h1><span>${total_view ? total_view : "no views"}</span></h1> 
-                                </div>                                                      
+                            <div class="flex ml-3 items-center">
+                                <i class="fa-solid fa-eye md:text-black text-sm px-2"></i>
+                                <h1><span>${total_view ? total_view : "no views"}</span></h1> 
+                            </div>                                                      
                         </div>
 
                          <div class="card-actions justify-end">
