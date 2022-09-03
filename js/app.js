@@ -1,5 +1,5 @@
 // loadCategory 
-const loadCategory =async() =>{
+const loadCategory = async() => {
     const url ="https://openapi.programming-hero.com/api/news/categories"
    try{
     const res =await fetch (url)
@@ -16,14 +16,14 @@ const displayCategory= async (data)=>{
     const categoryContainer =document.getElementById('category-container');
     data.forEach(category => {
         const {category_name,category_id} =category;
-        const categoriesDiv =document.createElement('li');
-        categoriesDiv.classList.add("font-semibold");
+        const categorieDiv =document.createElement('li');
+        categorieDiv.classList.add("font-semibold");
 
-        categoriesDiv.innerHTML=` 
+        categorieDiv.innerHTML=` 
         <a class="font-medium text-gray-900 bg-white rounded-full border hover:bg-gray-100 w-full" onclick="loadCard(${category_id})">${category_name}</a>
         `;
 
-        categoryContainer.appendChild(categoriesDiv)
+        categoryContainer.appendChild(categorieDiv)
         
     });
 };
@@ -49,19 +49,19 @@ const displayCard =(cards) =>{
     const cardSection = document.getElementById('card-section');
     cardSection.textContent =""
 
-    // founded msg  
-    const foundedMessege = document.getElementById('founded-msg');
+    // CATEGORY ITEM MESSAGE
+    const foundedMessege = document.getElementById('catefory-item-message');
     foundedMessege.classList.remove('hidden')
 
     
-    // founded-text
-    const fountText = document.getElementById('founded-text')
+    // CATEGORY ITEM TEXT
+    const fountText = document.getElementById('catefory-item-text')
     fountText.innerText = cards.length;
 
 
 
-    // speener 
-    const speenerContainer = document.getElementById('speener-container');
+    // SPINNER 
+    const speenerContainer = document.getElementById('spinner');
     speenerContainer.classList.remove('hidden');
     // console.log(speenerContainer);
     
@@ -90,7 +90,7 @@ const displayCard =(cards) =>{
         const cardSectionDiv =document.createElement("div");
 
             // speener 
-        const speenerContainer = document.getElementById('speener-container');
+        const speenerContainer = document.getElementById('spinner');
         speenerContainer.classList.add('hidden');
          
    
@@ -107,8 +107,8 @@ const displayCard =(cards) =>{
                                 <img class="w-[40px] rounded-full" src="${img ? img : "img not found"}" alt="">
                             </div>
                             <div >
-                                <h4 class="font-bold text-xl">${name ? name : "name not found"}</h4>
-                            <h5>${published_date ? published_date : "published date not found"}</h5>
+                                <h4 class="font-bold text-xl">${name ? name : "Name Not Found"}</h4>
+                            <h5>${published_date ? published_date : "Published Date Not Found"}</h5>
                             </div>
                         </div>
                 
@@ -155,7 +155,7 @@ const modal =async id =>{
     modalBody.textContent = "";
     modalBody.innerHTML =`
     <p class="mb-3">Author Name :${name? name  : "name not found"}</p>
-    <p class="mb-3">published date :${published_date ? published_date : 'published date not found'}</p>
+    <p class="mb-3">Published Date :${published_date ? published_date : 'published date not found'}</p>
     <img src="${img ? img: 'image not found'}"/>
     
     `
