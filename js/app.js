@@ -42,22 +42,20 @@ const loadCard =async(id) =>{
    }   
 }
 
-    // FIND NEWS  
-    const foundedMessege = document.getElementById('find-news');
-    foundedMessege.classList.remove('hidden')
 
-    // CARD
-    const cardSection = document.getElementById('cards');
-    cardSection.textContent =""
+
 
 const displayCard =(cards) =>{
-    
+    const cardSection = document.getElementById('card-section');
+    cardSection.textContent =""
+
+    // founded msg  
+    const foundedMessege = document.getElementById('founded-msg');
+    foundedMessege.classList.remove('hidden')
 
     
-
-    
-    // FIND TEXT
-    const fountText = document.getElementById('find-text')
+    // founded-text
+    const fountText = document.getElementById('founded-text')
     fountText.innerText = cards.length;
 
 
