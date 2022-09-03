@@ -30,7 +30,7 @@
    <header class="bg-backGround pt-4">
      <div class="navbar lg:px-20">
         <div class="flex-1">
-          <a class="text-2xl text-green-400 font-bold normal-case"><span class="text-white bg-green-500 p-2 rounded-md">News</span> Mgazine</a>
+          <a href="index.html" class="text-2xl text-green-400 font-bold normal-case"><span class="text-white bg-green-500 p-2 rounded-md">News</span> Mgazine</a>
         </div>
         <div class="flex-none">
          <div class="mr-5 text-xl font-bold text-green-600">
@@ -41,12 +41,57 @@
       </div>
 
       <!-- HR  -->
-      <div class="mt-4 border-b-2 border-b-gray-300 w-11/12 mx-auto">
+      <div class="mt-4 border-b-2 border-b-green-200">
 
       </div>
    </header>
 
+
+   <!-- MAIN SECTION -->
    <main class="bg-backGround">
+    <!-- MENU CATEGORY -->
+    <div class="container py-5">
+      <div id="category-container" class="menu menu-horizontal rounded-box grid grid-cols-3 lg:grid-cols-8 justify-between ">
+      </div>
+    </div>
+
+    <!-- FIND NEWS  -->
+    <div id="find-news" class="w-full container mx-auto bg-white text-black text-primary-content mb-5 shadow-md hidden">
+      <div class="p-5 items-center text-center">
+        <h2 class="card-title"><span id="find-text">0</span> items found </h2>
+        </div>
+    </div>
+
+    <!-- SPINNER  -->
+    <section id="speener-container" class=" container mx-auto hidden">
+        <!-- <progress  class="progress w-full"></progress> -->
+    </section>
+
+    !-- CARD  -->
+    <section id="cards" class="container mx-auto mt-10">
+          
+          
+      </section>
+
+    <!-- MODAL -->
+    <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box relative">
+            <label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            
+            <div id="modal-body">
+
+            </div>
+        </div>
+    </div>
+
+
+  <!-- FOOTER  -->
+  <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+      <div>
+        <p>Copyright © 2022 - Md Masud Rana</p>
+      </div>
+  </footer>
 
       
             
