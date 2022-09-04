@@ -52,7 +52,7 @@
     <!-- MENU CATEGORY -->
     <section>
       <div class="container py-5 container">
-        <div id="category-container" class="menu menu-horizontal rounded-box grid grid-cols-3 lg:grid-cols-8 justify-between ">
+        <div id="category-container" class="menu flex flex-col md:flex-row rounded-box p-2 justify-around">
         </div>
       </div>
     </section>
@@ -83,8 +83,12 @@
         </div>
       </div>
     </section>
-  </main>
 
+    <!-- SPINNER -->
+    <div id="spinner" class="flex items-center justify-center space-x-2 animate-bounce hidden">
+        <div class="w-10 h-10 bg-green-600 rounded-full"></div>
+    </div>
+  </main>
 
   <!-- FOOTER  -->
     <footer class="footer footer-center p-10 bg-white text-base-content rounded">

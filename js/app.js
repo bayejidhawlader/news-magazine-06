@@ -1,41 +1,45 @@
-// loadCategory 
-const loadCategory = async() => {
-    const url ="https://openapi.programming-hero.com/api/news/categories"
+// LOAD CATEGORY 
+const loadCategoryes = async() => {
    try{
+    const url ="https://openapi.programming-hero.com/api/news/categories"
     const res =await fetch (url)
     const data = await res.json()
     displayCategory(data.data.news_category)
    }
    catch(error){
     console.log(error);
-   }   
+   }
    
 }
 // LOAD CATEGORY
-loadCategory()
+loadCategoryes()
+
 
 
 const displayCategory= async (data)=>{
     
     const categoryContainer =document.getElementById('category-container');
     data.forEach(category => {
-        const {category_name,category_id} =category;
+        const {category_name,category_id} = category;
         const categorieDiv =document.createElement('li');
         categorieDiv.classList.add("font-semibold");
 
         categorieDiv.innerHTML=` 
         <a class="font-medium text-gray-900 bg-white rounded-full border hover:bg-gray-100 w-full" onclick="loadCard(${category_id})">${category_name}</a>
         `;
-
         categoryContainer.appendChild(categorieDiv)
-        
-        
     });
+    toggleSpinner(false);
+    
 };
 
-// card section 
-const loadCard = async(id) =>{
 
+
+// CARD SECTION
+const loadCard = async(id) => {
+    const getSpinner = document.getElementById('spinner');
+    getSpinner.classList.remove('hidden');
+    
     const url =`https://openapi.programming-hero.com/api/news/category/0${id}`
    try{
     const res =await fetch (url)
@@ -46,9 +50,9 @@ const loadCard = async(id) =>{
     console.log(error);
    }
 }
-// CARD LOAD
-loadCard("1")
 
+// CARD LOAD
+loadCard("3")
 
 const displayCard =(cards) =>{
     const cardSection = document.getElementById('card-section');
@@ -57,6 +61,16 @@ const displayCard =(cards) =>{
     // CATEGORY ITEM MESSAGE
     const foundedMessege = document.getElementById('catefory-item-message');
     foundedMessege.classList.remove('hidden')
+
+    // CATEGORY ITEM TEXT
+    const fountText = document.getElementById('catefory-item-text')
+    fountText.innerText = cards.length;
+
+    // SPINNER
+    const getSpinner = document.getElementById('spinner');
+    if (cards.length === 0) {
+      getSpinner.classList.add('hidden');
+    }
 
     // FIND SORT
     const sortFind = cards.sort((x,y)=>{
@@ -68,29 +82,17 @@ const displayCard =(cards) =>{
         }
     });
 
-
-    const toggleSpinner = (isLoading) => {
-        const loaderSection = document.getElementById("loader");
-        if (isLoading) {
-          loaderSection.classList.remove("hidden");
-        } else {
-          loaderSection.classList.add("hidden");
-        }
-      };
-
-    
-    // CATEGORY ITEM TEXT
-    const fountText = document.getElementById('catefory-item-text')
-    fountText.innerText = cards.length;
-
     cards.forEach(card => {
         
         const {image_url,thumbnail_url,title,details,author,total_view,} = card;
         const {name,published_date,img} = author;
 
+        // SPINNER
+        const getSpinner = document.getElementById('spinner');
+        getSpinner.classList.add('hidden');
+
         const cardSectionDiv =document.createElement("div");
-         
-   
+
 
         cardSectionDiv.classList.add("card", "lg:card-side", "bg-white", "shadow-xl", "lg:p-4", "mb-15" ,"w-11/12","lg:w-full","mx-auto")
         cardSectionDiv.innerHTML =`
@@ -151,7 +153,3 @@ const loadFullNews = async id => {
     document.getElementById('newsAuthor').innerText = newsData[0].author.name ? newsData[0].author.name : 'No data found';
     document.getElementById('newsDate').innerText = newsData[0].author.published_date ? newsData[0].author.published_date : 'No data found';
   }
-
-
-
-
